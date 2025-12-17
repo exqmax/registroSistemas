@@ -105,7 +105,7 @@
             new Chart(pie1, {
                 type: 'doughnut',
                 data: {
-                    labels: ["Capturadora Video", "Pastel Italiano", "Azúcar"],
+                    labels: ["Teclado", "Mouse", "Monitor"],
                     datasets: [{ data: [125, 105, 50] }]
                 }
             });
@@ -127,7 +127,7 @@
             new Chart(pie3, {
                 type: 'doughnut',
                 data: {
-                    labels: ["Azúcar", "Video 1080p", "Pastel"],
+                    labels: ["Impresora", "PC de escritorio", "Notebook"],
                     datasets: [{ data: [22, 12, 8] }]
                 }
             });
@@ -138,5 +138,6 @@
     document.addEventListener('DOMContentLoaded', function () {
         initNavigation();
     });
+
 
 })();
