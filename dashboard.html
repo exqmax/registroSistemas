@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard Inventario</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/efecto-neon.css">
+
+    <!-- ICONOS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <!-- CHART.JS (librería) -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+        <h2>Inventario EXQMAX</h2>
+        <ul class="sidebar-menu">
+            <li class="active"><a href="#" data-view="dashboard"><i class="fa fa-chart-pie"></i> Inventarios</a></li>
+            <li><a href="#" data-view="cuentas"><i class="fa fa-users"></i> Cuentas y Privilegios</a></li>
+            <li><a href="#" data-view="ajustes"><i class="fa fa-gear"></i> Ajustes</a></li>
+            <li><a href="#" data-view="info"><i class="fa fa-info-circle"></i> Información</a></li>
+        </ul>
+    </aside>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="main">
+
+        <!-- VISTAS: Cada sección con clase .view y un id -->
+        <!-- DASHBOARD (vista por defecto) -->
+        <section id="dashboard" class="view">
+            <header class="header">
+                <h3>DASHBOARD</h3>
+                <p>Selecciona un módulo y comienza a trabajar</p>
+            </header>
+
+            <!-- CARDS -->
+            <section class="cards">
+                <div class="card">
+                    <h3>TOTAL INVENTARIO Disponible</h3>
+                    <p class="value">450 PC de escritorio</p>
+                    <p class="value">32 Notebooks</p>
+                    <p class="value">50 Impresoras</p>
+                    <p class="value">10 Teléfonos</p>
+                </div>
+
+                <div class="card">
+                    <h3>TOTAL INVENTARIO ENTREGADO</h3>
+                    <p class="value">450 PC de escritorio</p>
+                    <p class="value">32 Notebooks</p>
+                    <p class="value">50 Impresoras</p>
+                    <p class="value">10 Teléfonos</p>
+                </div>
+            </section>
+
+            <!-- GRÁFICO PRINCIPAL -->
+            <section class="chart">
+                <h3>Productos en Inventario</h3>
+                <canvas id="barChart"></canvas>
+            </section>
+
+            <!-- GRÁFICOS CIRCULARES -->
+            <section class="circle-container">
+                <div class="circle-chart">
+                    <h3>Entradas</h3>
+                    <canvas id="pie1"></canvas>
+                </div>
+
+                <div class="circle-chart">
+                    <h3>Salidas</h3>
+                    <canvas id="pie2"></canvas>
+                </div>
+
+                <div class="circle-chart">
+                    <h3>Total General Movimientos</h3>
+                    <canvas id="pie3"></canvas>
+                </div>
+            </section>
+
+            <h3 style="margin-top:30px;">Módulos</h3>
+
+            <!-- ICON GRID: cada .icon-box tiene data-view para abrir la vista correspondiente -->
+            <section class="icons-grid">
+                <div class="icon-box" data-view="delegaciones"><i class="fa fa-home"></i><p>Delegaciones</p></div>
+                <div class="icon-box" data-view="personal"><i class="fa fa-user"></i><p>Personal</p></div>
+                <div class="icon-box" data-view="equipos"><i class="fa fa-laptop"></i><p>Equipos</p></div>
+                <div class="icon-box" data-view="proveedores"><i class="fa fa-truck"></i><p>Proveedores</p></div>
+                <div class="icon-box" data-view="cotizaciones"><i class="fa fa-file-invoice"></i><p>Cotizaciones</p></div>
+                <div class="icon-box" data-view="ordenes"><i class="fa fa-cart-plus"></i><p>Órdenes Compra</p></div>
+                <div class="icon-box" data-view="reparacion"><i class="fa fa-clipboard"></i><p>Equipamiento en reparación</p></div>
+                <div class="icon-box" data-view="bajas"><i class="fa fa-arrow-right"></i><p>Equipos dados de baja</p></div>
+                <div class="icon-box" data-view="movimientos"><i class="fa fa-exchange"></i><p>Movimientos</p></div>
+                <div class="icon-box" data-view="cargamasiva"><i class="fa fa-upload"></i><p>Carga Masiva</p></div>
+                <div class="icon-box" data-view="revisiones"><i class="fa fa-check"></i><p>Revisiones de equipamiento</p></div>
+            </section>
+        </section>
+
+        <!-- VIEW: Delegaciones -->
+        <section id="delegaciones" class="view">
+            <header class="module-header">
+                <i class="fa fa-home module-icon"></i>
+                <h2>Delegaciones</h2>
+            </header>
+
+            <section class="table-container">
+                <table class="styled-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Provincia</th>
+                            <th>Dirección</th>
+                            <th>Contacto</th>
+                            <th>Teléfono</th>
+                            <th>Email</th>
+                            <th>Responsable</th>
+                            <th>Estado</th>
+                            <th>Notas</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- FILAS DE EJEMPLO -->
+                        <tr>
+                            <td>1</td>
+                            <td>Delegación Centro</td>
+                            <td>Córdoba</td>
+                            <td>Av. Principal 123</td>
+                            <td>Recepción</td>
+                            <td>(0351) 123-4567</td>
+                            <td>centro@exqmax.com</td>
+                            <td>Juan Pérez</td>
+                            <td>Activa</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Delegación Norte</td>
+                            <td>Córdoba</td>
+                            <td>Calle Norte 55</td>
+                            <td>Recepción</td>
+                            <td>(0351) 765-4321</td>
+                            <td>norte@exqmax.com</td>
+                            <td>Ana García</td>
+                            <td>Activa</td>
+                            <td>-</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+        </section>
+
+        <!-- VIEW: Personal -->
+        <section id="personal" class="view">
+            <header class="module-header">
+                <i class="fa fa-user module-icon"></i>
+                <h2>Personal</h2>
+            </header>
+            <section class="table-container">
+                <p>Listado de personal aquí (placeholder).</p>
+            </section>
+        </section>
+
+        <!-- VIEW: Equipos -->
+        <section id="equipos" class="view">
+            <header class="module-header">
+                <i class="fa fa-laptop module-icon"></i>
+                <h2>Equipos</h2>
+            </header>
+            <section class="table-container">
+                <p>Listado de equipos aquí (placeholder).</p>
+            </section>
+        </section>
+
+        <!-- VIEW: Proveedores -->
+        <section id="proveedores" class="view">
+            <header class="module-header">
+                <i class="fa fa-truck module-icon"></i>
+                <h2>Proveedores</h2>
+            </header>
+            <section class="table-container">
+                <p>Listado de proveedores aquí (placeholder).</p>
+            </section>
+        </section>
+
+        <!-- VIEW: Cotizaciones -->
+        <section id="cotizaciones" class="view">
+            <header class="module-header">
+                <i class="fa fa-file-invoice module-icon"></i>
+                <h2>Cotizaciones</h2>
+            </header>
+            <section class="table-container">
+                <p>Listado de cotizaciones aquí (placeholder).</p>
+            </section>
+        </section>
+
+        <!-- VIEW: Órdenes Compra -->
+        <section id="ordenes" class="view">
+            <header class="module-header">
+                <i class="fa fa-cart-plus module-icon"></i>
+                <h2>Órdenes Compra</h2>
+            </header>
+            <section class="table-container">
+                <p>Órdenes de compra (placeholder).</p>
+            </section>
+        </section>
+
+        <!-- VIEW: Equipamiento en reparación -->
+        <section id="reparacion" class="view">
+            <header class="module-header">
+                <i class="fa fa-clipboard module-icon"></i>
+                <h2>Equipamiento en reparación</h2>
+            </header>
+            <section class="table-container">
+                <p>Equipamiento en reparación (placeholder).</p>
+            </section>
+        </section>
+
+        <!-- VIEW: Equipos dados de baja -->
+        <section id="bajas" class="view">
+            <header class="module-header">
+                <i class="fa fa-arrow-right module-icon"></i>
+                <h2>Equipos dados de baja</h2>
+            </header>
+            <section class="table-container">
+                <p>Equipos dados de baja (placeholder).</p>
+            </section>
+        </section>
+
+        <!-- VIEW: Movimientos -->
+        <section id="movimientos" class="view">
+            <header class="module-header">
+                <i class="fa fa-exchange module-icon"></i>
+                <h2>Movimientos</h2>
+            </header>
+            <section class="table-container">
+                <p>Movimientos (placeholder).</p>
+            </section>
+        </section>
+
+        <!-- VIEW: Carga Masiva -->
+        <section id="cargamasiva" class="view">
+            <header class="module-header">
+                <i class="fa fa-upload module-icon"></i>
+                <h2>Carga Masiva</h2>
+            </header>
+            <section class="table-container">
+                <p>Carga Masiva (placeholder).</p>
+            </section>
+        </section>
+
+        <!-- VIEW: Revisiones de equipamiento -->
+        <section id="revisiones" class="view">
+            <header class="module-header">
+                <i class="fa fa-check module-icon"></i>
+                <h2>Revisiones de equipamiento</h2>
+            </header>
+            <section class="table-container">
+                <p>Revisiones (placeholder).</p>
+            </section>
+        </section>
+
+        <!-- VIEW: Cuentas y Privilegios -->
+        <section id="cuentas" class="view">
+            <header class="module-header">
+                <i class="fa fa-users module-icon"></i>
+                <h2>Cuentas y Privilegios</h2>
+            </header>
+            <section class="table-container">
+                <p>Cuentas y privilegios (placeholder).</p>
+            </section>
+        </section>
+
+        <!-- VIEW: Ajustes -->
+        <section id="ajustes" class="view">
+            <header class="module-header">
+                <i class="fa fa-gear module-icon"></i>
+                <h2>Ajustes</h2>
+            </header>
+            <section class="table-container">
+                <p>Ajustes (placeholder).</p>
+            </section>
+        </section>
+
+        <!-- VIEW: Información -->
+        <section id="info" class="view">
+            <header class="module-header">
+                <i class="fa fa-info-circle module-icon"></i>
+                <h2>Información</h2>
+            </header>
+            <section class="table-container">
+                <p>Información (placeholder).</p>
+            </section>
+        </section>
+
+    </main>
+
+    <!-- JS EXTERNO -->
+    <script src="js/dashboard.js"></script>
+</body>
+</html>
